@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { hover } from "@testing-library/user-event/dist/hover";
-
+import "./Weather.css";
 const Weather = () => {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
@@ -35,24 +34,6 @@ const Weather = () => {
       }, 1000);
     }
   };
-  let weatherCards = [
-    {
-      label: "Temperature",
-      value: "temp_c",
-    },
-    {
-      label: "Humidity",
-      value: "humidity",
-    },
-    {
-      label: "Condition",
-      value: "condition.text",
-    },
-    {
-      label: "Humidity",
-      value: "wind_kph",
-    },
-  ];
 
   return (
     <div style={styles.weatherContainer}>
@@ -74,7 +55,7 @@ const Weather = () => {
       {error && <p style={styles.errorMessage}>{error}</p>}
 
       {weather && !loading && (
-        <div style={styles.weatherCards}>
+        <div className="weather-cards">
           <WeatherCard
             title="Temperature"
             value={`${weather.current.temp_c}°C`}
@@ -96,13 +77,6 @@ const Weather = () => {
     </div>
   );
 };
-
-// const WeatherCard = ({ title, value }) => (
-//   <div style={styles.weatherCard}>
-//     <h3>{title}</h3>
-//     <p>{value}</p>
-//   </div>
-// );
 const WeatherCard = ({ title, value }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -120,6 +94,7 @@ const WeatherCard = ({ title, value }) => {
   return (
     <div
       style={baseStyle}
+      className="weather-card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -169,18 +144,5 @@ const styles = {
   },
   errorMessage: {
     color: "red",
-  },
-  weatherCards: {
-    display: "flex",
-    gap: "15px",
-    marginTop: "20px",
-  },
-  weatherCard: {
-    backgroundColor: "#a8fbff",
-    padding: "15px",
-    borderRadius: "20px",
-    boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
-    textAlign: "center",
-    minWidth: "120px",
   },
 };
